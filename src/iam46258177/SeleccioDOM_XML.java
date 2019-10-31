@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.Scanner;
 
-public class Main {
+public class SeleccioDOM_XML {
 
     public static void main(String argv[]) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -21,7 +21,6 @@ public class Main {
             Document document = builder.parse(new File("data/produkte.xml"));
             document.getDocumentElement().normalize();
 
-            System.out.println("Elemento raíz: " + document.getDocumentElement().getNodeName());
             NodeList content = document.getElementsByTagName("area");
 
             Node ar = content.item(0);
@@ -42,11 +41,17 @@ public class Main {
 
                 }
                 System.out.println("----------------------------------------------");
+                System.out.print(">> Introdueix el número del curs del que vols informació: ");
+                int numero = scanner.nextInt();
+                System.out.println("\nCurs: " + informacio.item(numero).getAttributes().getNamedItem("header").getTextContent());
+                System.out.println("\nInformació del curs: \n" + informacio.item(numero).getAttributes()
+                        .getNamedItem("text").getTextContent());
             }
 
 
-            System.out.print(">> Introdueix el número del curs del que vols informació: ");
-            scanner.nextInt();
+
+
+
         } catch (Exception e) { e.printStackTrace();}
     }
 }
